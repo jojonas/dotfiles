@@ -1,0 +1,85 @@
+{
+  // behavior
+  "telemetry.telemetryLevel": "off",
+  "editor.formatOnSave": true,
+  "editor.suggestSelection": "first",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "remote.SSH.connectTimeout": 30,
+  "remote.SSH.localServerDownload": "always",
+  "workbench.startupEditor": "none",
+  "terminal.integrated.gpuAcceleration": "off",
+    
+  "files.associations": {
+    "Vagrantfile": "ruby",
+    "*.sage": "python"
+  },
+
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true,
+    "**/.mypy_cache": true,
+  },
+
+  // appearance
+  "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "workbench.colorTheme": "Default Light+",
+  "window.titleBarStyle": "custom",
+
+  // file type specific
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.languageServer": "Pylance",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingTypeStubs": "information"
+  },
+  "python.analysis.typeCheckingMode": "basic",
+
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "go.toolsManagement.autoUpdate": true,
+
+  "[yaml]": {
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true
+  },
+
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[svelte]": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2
+  },
+  "svelte.enable-ts-plugin": true,
+
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+
+  "latex-workshop.view.pdf.viewer": "tab",
+}
