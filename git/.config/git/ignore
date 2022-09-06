@@ -1,0 +1,40 @@
+
+# Compiled executables
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# OS generated files
+.DS_Store
+desktop.ini
+Thumbs.db
+
+# Python generated files
+.mypy_cache/
+__pycache__/
+*.py[cod]
+.coverage
+*.egg-info/
+
+# Swap/backup files
+*.swp
+*.bak
+*~
+*#
+
+# IDE files
+.vscode/
+.idea/
+
+# Javascript dependency vendor dir
+node_modules/
+
+# Vagrant meta info
+.vagrant/
+
+# Other version control systems
+.svn/
+.hg/
