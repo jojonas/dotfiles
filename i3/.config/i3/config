@@ -243,19 +243,8 @@ for_window [window_role="Preferences"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="SpeedCrunch"] floating enable
 
-#######################
-##### AUTOSTARTS ######
-#######################
+########################
+##### LOCAL CONFIG #####
+########################
 
-exec_always --no-startup-id "~/.config/polybar/launch.sh"
-exec_always --no-startup-id "feh --bg-fill ~/images/wallpaper"
-exec_always --no-startup-id "xset r rate 300 50"
-exec --no-startup-id "~/bin/xautolock-wrapper start"
-
-exec --no-startup-id compton
-exec --no-startup-id udiskie -t
-exec --no-startup-id nm-applet
-exec --no-startup-id pasystray
-exec --no-startup-id nextcloud
-# exec --no-startup-id syncthing-gtk -m
-exec --no-startup-id dunst
+include ~/.config/i3/config.local
