@@ -144,6 +144,14 @@ PS3='?# '
 # Execution trace prompt (setopt xtrace). default: '+%N:%i>'
 PS4='+%N:%i:%_> '
 
+# Configure default applications (can be overriden later in .zshrc.local)
+export VISUAL="$(command -v nvim || command -v vim || command -v nano || command -v vi)"
+export EDITOR="$VISUAL"
+export SUDO_EDITOR="$VISUAL"
+export PAGER="$(command -v less || command -v more)"
+export TERMINAL="$(command -v konsole || command -v gnome-terminal || command -v xfce4-terminal || command -v qterminal || command -v xterm)"
+export BROWSER="$(command -v firefox || command -v chromium)"
+
 # Color aliases
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
