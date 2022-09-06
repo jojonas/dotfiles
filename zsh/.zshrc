@@ -45,10 +45,6 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# Bracketed paste
-autoload -Uz bracketed-paste-magic
-zle -N bracketed-paste bracketed-paste-magic
-
 # List choices on an ambiguous completion
 zstyle ':completion:*' menu select
 
@@ -60,6 +56,14 @@ setopt complete_aliases
 
 # Extended globbing (e.g. ./**/*.js)
 setopt extended_glob
+
+# Enable bracketed paste support
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+# Enable support for Ctrl+X Ctrl+E
+autoload edit-command-line
+zle -N edit-command-line
 
 # Key bindings
 bindkey -e
@@ -106,8 +110,9 @@ bindkey -- "^[[3;5~"    delete-word
 bindkey -- "^H"         backward-kill-dir # ctrl + backspace
 bindkey -- "^[^H"       backward-kill-dir # alt + backspace
 bindkey -- "^R"         history-incremental-search-backward
+bindkey -- "^X^e"       edit-command-line
 
-# 'hash' often used directories
+# 'hash' often used directories so they can be accessed as ~doc, ~log, ...
 hash -d doc=/usr/share/doc
 hash -d linux=/lib/modules/$(command uname -r)/build/
 hash -d log=/var/log
