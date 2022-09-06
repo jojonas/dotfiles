@@ -1,0 +1,28 @@
+# Allgemein
+startup_message     off         # Keine Willkommensnachricht
+vbell               off         # Kein visuelles Blinken
+msgwait             3           # Nachrichten für 3 Sekunden anzeigen
+defutf8             on          # utf8 bei neuen fenstern
+autodetach          on          # on = default
+shelltitle          '$ |bash'   # Fenstertitel
+hardcopydir         $HOME       # Screenshots ins Homeverzeichnis
+defscrollback       10000       # Buffer
+altscreen           on          # Different buffer for vim/less etc.
+defmonitor          off         # Aktivitäten nicht in Fenstertitel schreiben
+deflogin            off         # Prozesse nicht als Login-Shells starten
+multiuser           on          # Mehrere Nutzer an einer Session erlauben
+
+# Statuszeile
+caption always "%{= wk} %-w%{= KW} [%n %t] %{-}%+w %= | @%H | %l | %D %d.%m.%Y %c "
+hardstatus          off
+
+# Shortcut to reload ~/.screenrc
+bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded.'"
+
+# 256 Colors
+attrcolor b ".I"
+defbce              on
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+term        screen-256color
+

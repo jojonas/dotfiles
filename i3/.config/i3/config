@@ -1,0 +1,261 @@
+#####################
+##### VARIABLES #####
+#####################
+
+# set colors from .Xresources
+# fallback: gruvbox color scheme
+set_from_resource $white color7 #ffffff
+set_from_resource $bg color0 #282828
+set_from_resource $red color1 #cc241d
+set_from_resource $green color2 #98971a
+set_from_resource $yellow color3 #d79921
+set_from_resource $blue color4 #458588
+set_from_resource $purple color6 #b16286
+set_from_resource $aqua color6 #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+set $font       Hack 10
+
+##########################
+##### GENERAL CONFIG #####
+##########################
+
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+
+# Your preferred terminal emulator
+set $term xfce4-terminal
+
+# Your preferred application launcher
+set $menu "rofi -show combi"
+
+# Your preferred screen locker
+#set $locker i3lock -e -f -c 000000 -i ~/images/lockscreen -t
+#set $locker i3lock -e -f -c 000000 -i ~/images/lockscreen
+set $locker "~/bin/xautolock-wrapper lock"
+#set $locker light-locker-command -l
+
+###################
+##### STYLING #####
+###################
+
+
+# General colors:
+# class                 border      backgr      text        indicator   child_border
+# class                 border|backgr|text|indicator|child_border
+client.focused          $blue       $blue       $darkgray   $purple     $darkgray
+client.focused_inactive $darkgray   $darkgray   $yellow     $purple     $darkgray
+client.unfocused        $darkgray   $darkgray   $yellow     $purple     $darkgray
+client.urgent           $red        $red        $white      $red        $red
+
+# Status Bar:
+#bar {
+#    position top
+#    status_command i3status
+#    font pango:$font
+#    colors {
+#        # bar background color
+#        background $bg
+#        # text color used for blocks that do not have a color specified.
+#        statusline $yellow
+#        # workspaces section
+#        #                    border  backgr. text
+#        focused_workspace    $aqua $aqua $darkgray
+#        inactive_workspace   $darkgray $darkgray $yellow
+#        active_workspace     $darkgray $darkgray $yellow
+#        urgent_workspace     $red $red $bg
+#    }
+#    tray_output primary
+#    #output primary
+#    height 30
+#}
+
+font pango:$font
+
+# borders. normal = screen decoration with title, pixel = just some pixels, none = none
+#default_border normal 1
+# default_border none
+# default_floating_border normal 1
+# hide_edge_borders both
+
+for_window [class="^.*"] border pixel 0
+
+# i3-gaps specific
+gaps inner 5
+gaps outer 5
+
+########################
+##### KEY BINDINGS #####
+########################
+
+# start a terminal
+#bindsym $mod+Return exec $term --hide-scrollbar -x /usr/bin/tmux
+bindsym $mod+Return exec $term --show-scrollbar
+bindsym $mod+Shift+Return exec $term --show-scrollbar
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start your launcher
+bindsym $mod+d exec $menu
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod
+
+focus_follows_mouse yes
+
+# reload the configuration file
+bindsym $mod+Shift+r restart
+
+# exit sway (logs you out of your wayland session)
+bindsym $mod+Shift+e exit
+
+# Move your focus around
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Switch the current container between different layout styles
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+# bindsym $mod+space focus mode_toggle
+
+# move focus to the parent container
+
+bindsym $mod+a focus parent
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# Resizing containers:
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bindsym $mod+space exec $menu
+bindsym $mod+l exec $locker
+bindsym $mod+Shift+l exec xtrlock
+bindsym $mod+c exec /usr/bin/speedcrunch
+
+bindsym $mod+n exec ~/bin/i3-rename-workspace
+
+bindsym XF86AudioRaiseVolume exec ~/bin/set-volume +5%
+bindsym XF86AudioLowerVolume exec ~/bin/set-volume -5%
+bindsym XF86AudioMute exec ~/bin/set-volume 0%
+bindsym XF86MonBrightnessUp exec ~/bin/set-brightness -inc 5
+bindsym XF86MonBrightnessDown exec ~/bin/set-brightness -dec 5
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioStop exec playerctl stop
+
+#bindsym XF86MonBrightnessUp
+#bindsym XF86MonBrightnessDown
+
+##########################
+##### MONITOR CONFIG #####
+##########################
+
+#workspace 1 output eDP-1
+#workspace 2 output HDMI-1
+
+###########################
+##### WINDOW SPECIFIC #####
+###########################
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="menu"] floating enable
+for_window [window_role="Preferences"] floating enable
+
+for_window [class="Pavucontrol"] floating enable
+for_window [class="SpeedCrunch"] floating enable
+
+#######################
+##### AUTOSTARTS ######
+#######################
+
+exec_always --no-startup-id "~/.config/polybar/launch.sh"
+exec_always --no-startup-id "feh --bg-fill ~/images/wallpaper"
+exec_always --no-startup-id "xset r rate 300 50"
+exec --no-startup-id "~/bin/xautolock-wrapper start"
+
+exec --no-startup-id compton
+exec --no-startup-id udiskie -t
+exec --no-startup-id nm-applet
+exec --no-startup-id pasystray
+exec --no-startup-id nextcloud
+# exec --no-startup-id syncthing-gtk -m
+exec --no-startup-id dunst
