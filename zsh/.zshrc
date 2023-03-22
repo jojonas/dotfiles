@@ -216,6 +216,28 @@ if type "rbenv" > /dev/null; then
     eval "$(rbenv init -)"
 fi
 
+# Activate FZF
+if type "fzf" > /dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+
+    if [[ -e "/usr/share/fzf/completion.zsh" ]]; then
+        # Arch
+        source "/usr/share/fzf/completion.zsh"
+    elif [[ -e "/usr/share/doc/fzf/examples/completion.zsh" ]]; then
+        # Debian
+        source "/usr/share/doc/fzf/examples/completion.zsh"
+    fi
+
+    if [[ -e "/usr/share/fzf/key-bindings.zsh" ]]; then
+        # Arch
+        source "/usr/share/fzf/key-bindings.zsh"
+    elif [[ -e "/usr/share/doc/fzf/examples/key-bindings.zsh" ]]; then
+        # Debian
+        source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+    fi
+fi
+
+# Source local zshrc
 if [[ -e "$HOME/.zshrc.local" ]]; then
     source "$HOME/.zshrc.local"
 fi
