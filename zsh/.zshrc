@@ -120,6 +120,9 @@ hash -d slog=/var/log/syslog
 hash -d src=/usr/src
 hash -d www=/var/www
 
+# automatically rehash on each completion
+zstyle ':completion:*' rehash true
+
 # Configure prompt
 
 # Configure VCS/Git support
