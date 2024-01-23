@@ -239,6 +239,9 @@ if type "fzf" > /dev/null; then
     fi
 fi
 
+# Add common directories to PATH
+export PATH=$PATH:$HOME/.local/bin
+
 # Source local zshrc
 if [[ -e "$HOME/.zshrc.local" ]]; then
     source "$HOME/.zshrc.local"
