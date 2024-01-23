@@ -107,7 +107,6 @@ bindkey -- "^[[4"       end-of-line
 bindkey -- "^[[1;5D"    backward-word
 bindkey -- "^[[1;5C"    forward-word
 bindkey -- "^[[3;5~"    delete-word
-bindkey -- "^H"         backward-kill-dir # ctrl + backspace
 bindkey -- "^[^H"       backward-kill-dir # alt + backspace
 bindkey -- "^R"         history-incremental-search-backward
 bindkey -- "^X^e"       edit-command-line
