@@ -13,7 +13,7 @@
 [diff]
     tool = meld
     algorithm = histogram
-	colorMoved = default
+    colorMoved = default
 
 [difftool]
     prompt = false
@@ -28,7 +28,7 @@
 [merge]
     # improve diffs
     #conflictstyle = zdiff3
-	keepbackup = false
+    keepbackup = false
 
 [commit]
     # add the whole diff into the commit text editor
@@ -36,7 +36,7 @@
 
 [push]
     # set up a remote tracking branch with the same name
-	autoSetupRemote = true
+    autoSetupRemote = true
     default = current
 
 [rerere]
