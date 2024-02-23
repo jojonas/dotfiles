@@ -1,0 +1,52 @@
+[init]
+    # set the branch name for new repositories
+    defaultBranch = main
+
+[fetch]
+    # automatically delete remote tracking branches that have been deleted
+    prune = true
+
+[pull]
+    # automatically rebase on 'git pull'
+    rebase = true
+
+[diff]
+    tool = meld
+    algorithm = histogram
+	colorMoved = default
+
+[difftool]
+    prompt = false
+
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+
+[mergetool "meld"]
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    useAutoMerge = true
+
+[merge]
+    # improve diffs
+    conflictstyle = zdiff3
+	keepbackup = false
+
+[commit]
+    # add the whole diff into the commit text editor
+    verbose = true
+
+[push]
+    # set up a remote tracking branch with the same name
+	autoSetupRemote = true
+    default = current
+
+[rerere]
+    # remember solved merge conflicts
+    enabled = true
+    autoUpdate = true
+
+[branch]
+    # make 'git branch' sort by most recently used branches
+    sort = -committerdate
+
+[include]
+    path = "~/.gitconfig.local"
