@@ -189,7 +189,7 @@ if type "nvim" > /dev/null; then
     alias vim="nvim"
 fi
 if type "fdfind" > /dev/null; then
-    alias fd="fdfind"
+    alias fd="fdfind --unrestricted"
 fi
 alias view="vim -R"
 alias vimdiff="vim -d"
