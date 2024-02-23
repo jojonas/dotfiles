@@ -27,7 +27,7 @@
 
 [merge]
     # improve diffs
-    conflictstyle = zdiff3
+    #conflictstyle = zdiff3
 	keepbackup = false
 
 [commit]
