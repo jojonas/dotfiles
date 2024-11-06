@@ -19,7 +19,7 @@ setopt share_history
 # Include timestamp in history
 setopt extended_history
 
-# Ignore duplicate history entries (after another)
+# Ignore subsequent duplicate history entries
 setopt hist_ignore_dups
 
 # Do not include function definitions in the history file
@@ -28,7 +28,7 @@ setopt hist_no_functions
 # Do not store the "history" command itself
 setopt hist_no_store
 
-# Remove sperfluous blanks from history
+# Remove superfluous blanks from history
 setopt hist_reduce_blanks
 
 # Change directory without "cd"
@@ -222,21 +222,26 @@ fi
 if type "fzf" > /dev/null; then
     export FZF_DEFAULT_COMMAND='fd --type f'
 
-    if [[ -e "/usr/share/fzf/completion.zsh" ]]; then
+    if [ -e "/usr/share/fzf/completion.zsh" ]; then
         # Arch
         source "/usr/share/fzf/completion.zsh"
-    elif [[ -e "/usr/share/doc/fzf/examples/completion.zsh" ]]; then
+    elif [ -e "/usr/share/doc/fzf/examples/completion.zsh" ]; then
         # Debian
         source "/usr/share/doc/fzf/examples/completion.zsh"
     fi
 
-    if [[ -e "/usr/share/fzf/key-bindings.zsh" ]]; then
+    if [ -e "/usr/share/fzf/key-bindings.zsh" ]; then
         # Arch
         source "/usr/share/fzf/key-bindings.zsh"
-    elif [[ -e "/usr/share/doc/fzf/examples/key-bindings.zsh" ]]; then
+    elif [ -e "/usr/share/doc/fzf/examples/key-bindings.zsh" ]; then
         # Debian
         source "/usr/share/doc/fzf/examples/key-bindings.zsh"
     fi
+fi
+
+# Enable command-not-found if installed
+if [ -f /etc/zsh_command_not_found ]; then
+    . /etc/zsh_command_not_found
 fi
 
 # Add common directories to PATH
