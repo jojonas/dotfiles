@@ -1,4 +1,6 @@
 .netrwhist
-vim/.vim/plugged
 .mypy_cache
 *.bak
+
+vim/.vim/plugged
+git/.config/git/gitk
