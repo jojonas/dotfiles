@@ -151,6 +151,32 @@ PS3='?# '
 # Execution trace prompt (setopt xtrace). default: '+%N:%i>'
 PS4='+%N:%i:%_> '
 
+# Terminal title
+_zsh_termtitle_set_title() {
+    case ${TERM} in
+        screen)
+            print -Pn '\Ek'${(fV)1}'\E\\'
+            ;;
+        *)
+            print -Pn '\E]0;'${(fV)1}'\a'
+            ;;
+    esac
+}
+
+_zsh_termtitle_update_precmd() {
+    # see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+    _zsh_termtitle_set_title '%n@%m: %~'
+}
+
+_zsh_termtitle_update_preexec() {
+    # see https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+    _zsh_termtitle_set_title '%n@%m: '${(r:20:)2}
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _zsh_termtitle_update_precmd
+add-zsh-hook preexec _zsh_termtitle_update_preexec
+
 # Configure default applications (can be overriden later in .zshrc.local)
 export VISUAL="$(command -v nvim || command -v vim || command -v nano || command -v vi)"
 export EDITOR="$VISUAL"
