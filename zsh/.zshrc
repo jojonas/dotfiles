@@ -206,6 +206,10 @@ export TERMINAL="$(command -v konsole || command -v gnome-terminal || command -v
 export BROWSER="$(command -v firefox || command -v chromium)"
 
 # Color aliases
+if type dircolors > /dev/null; then
+  eval "$(dircolors -b)"
+fi
+
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
