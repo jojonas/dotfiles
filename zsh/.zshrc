@@ -190,7 +190,7 @@ export BROWSER="$(command -v firefox || command -v chromium)"
 # Color aliases
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
-alias egrep="grep --color=auto"
+alias egrep="egrep --color=auto"
 
 # Color for less/man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
@@ -226,7 +226,7 @@ alias ipsort="sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4"
 function mkcd () {
     if (( ARGC != 1 )); then
         printf 'usage: mkcd <new-directory>\n'
-        return 1;
+        return 1
     fi
     if [[ ! -d "$1" ]]; then
         command mkdir -p "$1"
