@@ -260,9 +260,19 @@ function kuse () {
     return 1
   fi
 
+  if [[ ! -f $1 ]]; then
+    printf "Ticket file does not exist: $1\n"
+    unset KRB5CCNAME
+    return 1
+  fi
+
   export KRB5CCNAME="${1:a}"
 
-  klist -c || true
+  if type klist > /dev/null; then
+    if ! klist -s; then
+      printf 'Warning: Expired Kerberos ticket.\n'
+    fi
+  fi
 }
 
 # Load direnv hook
