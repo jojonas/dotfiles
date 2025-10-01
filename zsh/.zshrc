@@ -138,10 +138,28 @@ zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:*' formats '(%F{green}%b%f%u%c) '
 zstyle ':vcs_info:*' actionformats '(%F{red}%b|%a%f%u%c) '
 
+# Kerberos ticket info (implementation by me)
+precmd_klist_info() {
+  if [[ -z $KRB5CCNAME ]]; then
+    return
+  fi
+
+  local username="${KRB5CCNAME:t:r}"
+
+  if ! type klist > /dev/null; then
+    klist_info_msg_="[%F{yellow}$username%f (?)] "
+  elif klist -s; then
+    klist_info_msg_="[%F{green}$username%f] "
+  else
+    klist_info_msg_="[%F{red}$username%f (exp)] "
+  fi
+}
+precmd_functions+=( precmd_klist_info )
+
 setopt prompt_subst
 
 # Primary prompt
-PROMPT='%F{yellow}%n@%m%f %F{red}%B%~%b%f ${vcs_info_msg_0_}%(!.#.$) '
+PROMPT='%F{yellow}%n@%m%f %F{red}%B%~%b%f ${vcs_info_msg_0_}${klist_info_msg_}%(!.#.$) '
 
 # Primary prompt (right side)
 # RPROMPT='[%F{yellow}%?%f]'
@@ -234,6 +252,17 @@ function mkcd () {
         printf '`%s'\'' already exists: cd-ing.\n' "$1"
     fi
     builtin cd "$1"
+}
+
+function kuse () {
+  if (( ARGC != 1 )); then
+    printf 'usage: kuse <ticket>\n'
+    return 1
+  fi
+
+  export KRB5CCNAME="${1:a}"
+
+  klist -c || true
 }
 
 # Load direnv hook
