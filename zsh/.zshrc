@@ -140,6 +140,8 @@ zstyle ':vcs_info:*' actionformats '(%F{red}%b|%a%f%u%c) '
 
 # Kerberos ticket info (implementation by me)
 precmd_klist_info() {
+  klist_info_msg_=""
+
   if [[ -z $KRB5CCNAME ]]; then
     return
   fi
