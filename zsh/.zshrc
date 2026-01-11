@@ -1,5 +1,15 @@
 # vim: ts=2:sw=2
 
+# to profile, call:
+# time ZSH_DEBUGRC=1 zsh -i -c exit
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zmodload zsh/zprof
+fi
+
+function zshrc-profile {
+    time ZSH_DEBUGRC=1 zsh -i -c exit
+}
+
 # Avoid beeping
 set nobeep
 
@@ -71,8 +81,8 @@ zle -N edit-command-line
 bindkey -e
 
 backward-kill-dir () {
-  local WORDCHARS="${WORDCHARS:s#/#}"
-  zle backward-delete-word
+    local WORDCHARS="${WORDCHARS:s#/#}"
+    zle backward-delete-word
 }
 zle -N backward-kill-dir
 
@@ -140,21 +150,21 @@ zstyle ':vcs_info:*' actionformats '(%F{red}%b|%a%f%u%c) '
 
 # Kerberos ticket info (implementation by me)
 precmd_klist_info() {
-  klist_info_msg_=""
+    klist_info_msg_=""
 
-  if [[ -z $KRB5CCNAME ]]; then
-    return
-  fi
+    if [[ -z $KRB5CCNAME ]]; then
+        return
+    fi
 
-  local username="${KRB5CCNAME:t:r}"
+    local username="${KRB5CCNAME:t:r}"
 
-  if ! type klist > /dev/null; then
-    klist_info_msg_="[%F{yellow}$username%f (?)] "
-  elif klist -s; then
-    klist_info_msg_="[%F{green}$username%f] "
-  else
-    klist_info_msg_="[%F{red}$username%f (exp)] "
-  fi
+    if ! (( $+commands[klist] )); then
+        klist_info_msg_="[%F{yellow}$username%f (?)] "
+    elif klist -s; then
+        klist_info_msg_="[%F{green}$username%f] "
+    else
+        klist_info_msg_="[%F{red}$username%f (exp)] "
+    fi
 }
 precmd_functions+=( precmd_klist_info )
 
@@ -208,8 +218,8 @@ export TERMINAL="$(command -v konsole || command -v gnome-terminal || command -v
 export BROWSER="$(command -v firefox || command -v chromium)"
 
 # Color aliases
-if type dircolors > /dev/null; then
-  eval "$(dircolors -b)"
+if (( $+commands[dircolors] )); then
+    source <(dircolors -b)
 fi
 
 alias ls="ls --color=auto"
@@ -237,10 +247,10 @@ alias rmdir="rmdir -v"
 
 # Common aliases
 alias ll="ls -alhF"
-if type "nvim" > /dev/null; then
+if (( $+commands[nvim] )); then
     alias vim="nvim"
 fi
-if type "fdfind" > /dev/null; then
+if (( $+commands[fdfind])); then
     alias fd="fdfind --unrestricted"
 fi
 alias view="vim -R"
@@ -274,7 +284,7 @@ function kuse () {
 
   export KRB5CCNAME="${1:a}"
 
-  if type klist > /dev/null; then
+  if (( $+commands[klist] )); then
     if ! klist -s; then
       printf 'Warning: Expired Kerberos ticket.\n'
     fi
@@ -282,17 +292,17 @@ function kuse () {
 }
 
 # Load direnv hook
-if type "direnv" > /dev/null; then
-    eval "$(direnv hook zsh)"
+if (( $+commands[direnv] )); then
+    source <(direnv hook zsh)
 fi
 
 # Activate rbenv
-if type "rbenv" > /dev/null; then
-    eval "$(rbenv init -)"
+if (( $+commands[rbenv] )); then
+    source <(rbenv init -)
 fi
 
 # Activate FZF
-if type "fzf" > /dev/null; then
+if (( $+commands[fzf] )); then
     export FZF_DEFAULT_COMMAND='fd --type f'
 
     if [ -e "/usr/share/fzf/completion.zsh" ]; then
@@ -325,3 +335,7 @@ if [[ -e "$HOME/.zshrc.local" ]]; then
     source "$HOME/.zshrc.local"
 fi
 
+# see first statement
+if [ -n "${ZSH_DEBUGRC+1}" ]; then
+    zprof
+fi
