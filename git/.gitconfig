@@ -1,3 +1,6 @@
+[user]
+    email = jojonas@users.noreply.github.com
+
 [init]
     # set the branch name for new repositories
     defaultBranch = main
