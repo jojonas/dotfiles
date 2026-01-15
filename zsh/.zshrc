@@ -250,8 +250,11 @@ alias ll="ls -alhF"
 if (( $+commands[nvim] )); then
     alias vim="nvim"
 fi
-if (( $+commands[fdfind])); then
+if (( $+commands[fdfind] )); then
     alias fd="fdfind --unrestricted"
+fi
+if (( $+commands[batcat] )); then
+    alias bat="batcat"
 fi
 alias view="vim -R"
 alias vimdiff="vim -d"
@@ -303,7 +306,7 @@ fi
 
 # Activate FZF
 if (( $+commands[fzf] )); then
-    export FZF_DEFAULT_COMMAND='fd --type f'
+    export FZF_DEFAULT_COMMAND='fdfind --type f'
 
     if [ -e "/usr/share/fzf/completion.zsh" ]; then
         # Arch
