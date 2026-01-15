@@ -190,8 +190,10 @@ else
 endif
 
 " key to toggle PASTE mode
-set pastetoggle=<F3>
+if !has('nvim')
+    set pastetoggle=<F3>
+endif
 
 if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+    source ~/.vimrc.local
 endif
