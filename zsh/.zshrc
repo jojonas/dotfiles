@@ -259,6 +259,7 @@ fi
 alias view="vim -R"
 alias vimdiff="vim -d"
 alias ipsort="sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4"
+alias ssh-add-all="find $HOME/.ssh -regex '.*/id_[^\.]+$' -exec ssh-add {} \;"
 
 function mkcd () {
     if (( ARGC != 1 )); then
